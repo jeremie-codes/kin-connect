@@ -1,0 +1,296 @@
+<%- include('header') -%>
+
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="d-flex align-items-center " style="width: 100%;">
+  <div class="container carousel-fade" style="width: 100%;">
+
+    <div class="carousel-item active d-md-flex row" style="width: 100%;">
+
+      <div id="head-title" style="text-align: center; top: 10px; position: relative;" class="pt-md-5 col-md-6"> 
+        <h2 class="animate__animated animate__fadeInDown p-2" >Bienvenue à <span> Kin-connect</h2> 
+          <!-- <img src="../assets/img/logo.png" class="js-tilt" data-tilt width="100"> </span>-->
+        <p class="fs-5 p-0" style="width: 80%;">Faites l'Achat / la Location des 
+          <span class="typed" style="color: #9b3131;" data-typed-items="Résidences., Voitures., Appartements., Bureaux., Terrains., Beaucoups d'Autre..."></span>
+        </p>
+
+        <p class="animate__animated animate__fadeInUp p-0" style="width: 80%;">
+          Une plateforme en ligne qui vous permet de faire du business partout à Kinshasa en restant simplement assis sur votre Canapé; Alors c'est parti!
+        </p>
+
+        <div class="text-center">
+          <a href="/apropos" class="btn btn-log rounded-pill border-2 animate__animated animate__fadeInUp" style="width: 130px;">Lire Plus</a>
+        </div>
+      </div>
+
+      <!-- Carousel image homme asssis sur canapé -->
+      <div id="heroCarousel" class="container carousel carousel-fade col-md-4 mt-3 mt-md-0" data-bs-ride="carousel" data-bs-interval="5000">
+
+        <!-- Slide 1 -->
+        <div class="carousel-item align-items-center active">
+          <div class="carousel-container">
+            <img src="../assets/img/hm.png" width="420" >
+          </div>
+        </div>
+        <!-- Slide 2 -->
+        <div class="carousel-item carousel-item2 align-items-center">
+          <div class="carousel-container">
+            <img src="../assets/img/hc.png" width="420" >
+          </div>
+        </div>
+        <!-- Slide 3 -->
+        <div class="carousel-item carousel-item3 align-items-center">
+          <div class="carousel-container">
+            <img src="../assets/img/hmc.png" width="380" >
+          </div>
+        </div>
+  
+      </div>
+      
+    </div>
+
+  </div>
+</section><!-- End Hero -->
+
+<main id="main">
+
+  <!-- Large Modal -->
+  <div class="annonce col-12 text-center">
+    <button type="button" class="btn btn-annonce btn-block col-md-6 mt-5 mt-md-0 p-2" style="font-size: 18px;" data-toggle="button" aria-pressed="false" autocomplete="off" data-bs-toggle="modal" data-bs-target="#fullscreenModal">
+      Cliquez ici pour publier une annonce 
+      <i class="bx bx-pen"></i> 
+    </button>
+  </div>
+
+  <!-- ======= Portfolio Section ======= -->
+  <section class="portfolio">
+    <div class="container">
+
+       <!-- Filter -->
+      <div class="accordion accordion-flush mt-2 mb-2 border col-12" id="accordionFlushExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header border-bottom p-0" id="flush-headingOne">
+            <button class="accordion-button collapsed text-center" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+              <a  data-bs-toggle="dropdown" href="#" style="width: 100%;">
+                <i class="bi bi-filter" style="font-size: 18px;" aria-hidden="true"></i> Filtrer par
+              </a>
+            </button>
+          </h2>
+          <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+            <ul id="portfolio-flters">
+              <li data-filter="*" class="filter-active">Tous</li>
+              <% categories.forEach( categorie => { %>
+                <li data-filter=".filter-<%= categorie.nomcat %>"><%= categorie.nomcat %></li>
+              <% }) %>
+            </ul>
+          </div>
+        </div>
+      </div><!--End Accordion without outline borders -->
+
+      <% if (locals.annonce.length > 0) { %>
+
+        <div class="row"> 
+          <span class="col-12 mb-2 portfolio-wrap" >Cliquez ici pour <a href="/kin-market">Voir plus <i class="bx bx-chevron-right"></i></a></span>
+        </div>
+
+        <div class="row portfolio-container d-none d-md-block" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
+
+          <% for( let i =0; i < locals.annonce.length; i++ ) {
+            const article = annonce[i] %>
+            <div class="col-lg-4 col-md-6 portfolio-wrap filter-<%= article.nomcat %>">
+              <div class="portfolio-item">
+
+                <!-- Card with an image on top -->
+                <div class="card p-0">
+                  <div id="carouselExampleControl<%=i%>" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                      <div class="carousel-item active">
+                        <img src="data:image/png;base64,<%= JSON.parse(article.image)[0].data %>" class="d-block w-100" alt="...">
+                      </div>
+                      <% for (let e=1; e < JSON.parse(article.image).length; e++) { %>
+                        <div class="carousel-item">
+                          <img src="data:image/png;base64,<%= JSON.parse(article.image)[e].data %>" class="d-block w-100" alt="...">
+                        </div>
+                      <% } %>
+                    </div>
+
+                    <% if (JSON.parse(article.image).length > 1) { %>
+                      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControl<%=i%>" data-bs-slide="prev">
+                        <span class="rounded-circle carousel-control-prev-icon" aria-hidden="true" style="background: #f7f7f7d3; color: #9b3131;">
+                          <i class="bx bx-chevron-left" aria-hidden="true" style="font-size: 34px;"></i>
+                        </span>
+                        <span class="visually-hidden">Previous</span>
+                      </button>
+                      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControl<%=i%>" data-bs-slide="next">
+                        <span class="rounded-circle carousel-control-next-icon" aria-hidden="true" style="background: #f7f7f7d3; ; color: #9b3131;">
+                          <i class="bx bx-chevron-right" aria-hidden="true" style="font-size: 34px;"></i>
+                        </span>
+                        <span class="visually-hidden">Next</span>
+                      </button>
+                    <% }%>
+
+                  </div><!-- End Slides with controls -->
+                </div><!-- End Card with an image on top -->
+
+                <div class="portfolio-info">
+                  <div>
+                    <h3><%= article.design %></h3>
+                    <p><%= article.description %></p>
+                    <a href="/kin-market/article-detail" title="Portfolio Details" class="btn btn-dark">
+                      Voir le detail
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% } %>
+          
+        </div>
+
+        <div class="portfolio-container portfolio-container2 d-md-none row" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
+
+          <% for( let i =0; i < locals.annonce.length; i++ ) { 
+            const article = annonce[i] %>
+            <!-- Card with an image on top -->
+            <div class="p-1 col-6 portfolio-wrap portfolio-wrap2 filter-<%= article.nomcat %>">
+              <a href="/kin-market/article-detail" class="card p-0">
+                <div id="carouselExampleControls<%=i%>" class="carousel slide" data-bs-ride="carousel">
+                  <div class="carousel-inner">
+                    <div class="carousel-item active">
+                      <img src="data:image/png;base64,<%= JSON.parse(article.image)[0].data %>" class="d-block w-100" alt="...">
+                    </div>
+                    <% for (let e=1; e < JSON.parse(article.image).length; e++) { %>
+                      <div class="carousel-item">
+                        <img src="data:image/png;base64,<%= JSON.parse(article.image)[e].data %>" class="d-block w-100" alt="...">
+                      </div>
+                    <% } %>
+                  </div>
+
+                  <% if (JSON.parse(article.image).length > 1) { %>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls<%=i%>" data-bs-slide="prev">
+                      <span class="rounded-circle carousel-control-prev-icon" aria-hidden="true" style="background: #f7f7f7d3; color: #9b3131;">
+                        <i class="bx bx-chevron-left" aria-hidden="true" style="font-size: 34px;"></i>
+                      </span>
+                      <span class="visually-hidden">Previous</span>
+                    </button>
+
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls<%=i%>" data-bs-slide="next">
+                      <span class="rounded-circle carousel-control-next-icon" aria-hidden="true" style="background: #f7f7f7d3; ; color: #9b3131;">
+                        <i class="bx bx-chevron-right" aria-hidden="true" style="font-size: 34px;"></i>
+                      </span>
+                      <span class="visually-hidden">Next</span>
+                    </button>
+                  <% }%>
+
+                </div><!-- End Slides with controls -->
+                <div class="card-body">
+                  <h5 class="card-title"><%= article.design %></h5>
+                  <p class="card-text">Some quick example text</p>
+                </div>
+              </a><!-- End Card with an image on top -->
+            </div><!-- End Card with an image on top -->
+          <% } %>
+          
+        </div>
+
+      <% } %>
+      
+
+      <div class="col-12 mt-2 d-md-none portfolio-wrap text-center"> 
+        <span>Cliquez ici pour <a href="/kin-market">Voir plus <i class="bx bx-chevron-right"></i></a></span>
+      </div>
+
+      <% if (locals.annonce.length == 0) { %>
+        <div class="alert alert-secondary text-center" role="alert">
+          <strong>Il n'y a aucune publication !</strong>
+        </div>
+      <% } %>
+
+    </div>
+  </section><!-- End Portfolio Section -->
+
+  <!-- ======= Features Section ======= -->
+  <section class="features pt-0">
+    <div class="container">
+
+      <div class="section-title">
+        <h2>Features</h2>
+        <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+      </div>
+
+      <div class="row" data-aos="fade-up">
+        <div class="col-md-5">
+          <img src="../assets/img/features-1.svg" class="img-fluid" alt="">
+        </div>
+        <div class="col-md-7 pt-4">
+          <h3>Voluptatem dignissimos provident quasi corporis voluptates sit assumenda.</h3>
+          <p class="fst-italic">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+            magna aliqua.
+          </p>
+          <ul>
+            <li><i class="bi bi-check"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
+            <li><i class="bi bi-check"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="row" data-aos="fade-up">
+        <div class="col-md-5 order-1 order-md-2">
+          <img src="../assets/img/features-2.svg" class="img-fluid" alt="">
+        </div>
+        <div class="col-md-7 pt-5 order-2 order-md-1">
+          <h3>Corporis temporibus maiores provident</h3>
+          <p class="fst-italic">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+            magna aliqua.
+          </p>
+          <p>
+            Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+            velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum
+          </p>
+        </div>
+      </div>
+
+      <div class="row" data-aos="fade-up">
+        <div class="col-md-5">
+          <img src="../assets/img/features-3.svg" class="img-fluid" alt="">
+        </div>
+        <div class="col-md-7 pt-5">
+          <h3>Sunt consequatur ad ut est nulla consectetur reiciendis animi voluptas</h3>
+          <p>Cupiditate placeat cupiditate placeat est ipsam culpa. Delectus quia minima quod. Sunt saepe odit aut quia voluptatem hic voluptas dolor doloremque.</p>
+          <ul>
+            <li><i class="bi bi-check"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
+            <li><i class="bi bi-check"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
+            <li><i class="bi bi-check"></i> Facilis ut et voluptatem aperiam. Autem soluta ad fugiat.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="row" data-aos="fade-up">
+        <div class="col-md-5 order-1 order-md-2">
+          <img src="../assets/img/features-4.svg" class="img-fluid" alt="">
+        </div>
+        <div class="col-md-7 pt-5 order-2 order-md-1">
+          <h3>Quas et necessitatibus eaque impedit ipsum animi consequatur incidunt in</h3>
+          <p class="fst-italic">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+            magna aliqua.
+          </p>
+          <p>
+            Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+            velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+            culpa qui officia deserunt mollit anim id est laborum
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section><!-- End Features Section -->
+
+  
+</main><!-- End #main -->
+
+<%- include('modal') -%>
+
+<%- include('footer') -%>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Kin-Login</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="assets/authCss/images/logo2.png"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="assets/authCss/vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="assets/authCss/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="assets/authCss/vendor/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="assets/authCss/vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="assets/authCss/vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="assets/authCss/css/util.css">
+	<link rel="stylesheet" type="text/css" href="assets/authCss/css/main.css">
+<!--===============================================================================================-->
+</head>
+<body>
+	
+	<!-- <div class="limiter" style="background-image: url('images/bg-registration-form-2.jpg');"> -->
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<div class="login100-pic js-tilt" data-tilt>
+					<img src="assets/authCss/images/logo.png" alt="IMG">
+				</div>
+
+				<form class="login100-form validate-form" method="post">
+					<span class="login100-form-title">
+						Connexion des membres
+					</span>
+
+					<div class="wrap-input100 validate-input" data-validate = "L'email valide est de format: ex@abc.xyz ou 081820...">
+						<input class="input100" type="text" name="mail" placeholder="Numéro">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-mobile-phone fa-2x" aria-hidden="true"></i>
+						</span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate = "Le mot de passe est exigé!">
+						<input class="input100" type="password" name="pass" placeholder="Mot de Passe">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-lock" style="font-size: 20px;" aria-hidden="true"></i>
+						</span>
+					</div>
+					
+					<div class="container-login100-form-btn">
+						<button class="login100-form-btn bg-danger">
+							Se Connecter
+						</button>
+					</div>
+
+					<div class="text-center p-t-12">
+						<a class="txt2" href="assets/authCss/#">
+							Utilisateur / Mot de Passe
+						</a>
+						<span class="txt1">
+							Oublié ?
+						</span>
+					</div>
+					
+					<% if (locals.error) { %>
+
+						<div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close" style="cursor: pointer;">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<small>
+								<%= error %>
+							</small>
+						</div>
+						<script>
+							$(".alert").alert();
+						</script>
+							
+					<% } %>
+
+					<div class="text-center p-t-136">
+						<a class="txt2" href="/inscription">
+							Créez votre compte 
+							<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+						</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+	
+
+	
+	<!--===============================================================================================-->	
+	<script src="assets/authCss/vendor/jquery/jquery-3.2.1.min.js"></script>
+	<!--===============================================================================================-->
+	<script src="assets/authCss/vendor/bootstrap/js/popper.js"></script>
+	<script src="assets/authCss/vendor/bootstrap/js/bootstrap.min.js"></script>
+	<!--===============================================================================================-->
+	<script src="assets/authCss/vendor/select2/select2.min.js"></script>
+	<!--===============================================================================================-->
+	<script src="assets/authCss/vendor/tilt/tilt.jquery.min.js"></script>
+	<script >
+		$('.js-tilt').tilt({
+			scale: 1.1
+		})
+	</script>
+<!--===============================================================================================-->
+	<script src="assets/authCss/js/main.js"></script>
+
+</body>
+</html>

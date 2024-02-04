@@ -1,0 +1,211 @@
+<%- include('header') -%>
+
+<main id="main">
+
+  <!-- ======= Our Portfolio Section ======= -->
+  <section class="breadcrumbs mb-0">
+    <div class="container">
+
+      <div class="d-flex justify-content-between align-items-center">
+        <h2 class="mt-2"><i class="bx bx-basket"></i> <span>Kin Market</span></h2>
+        <ol>
+          <li><a href="/">accueil</a></li>
+          <li>Kin Market</li>
+        </ol>
+      </div>
+      
+    </div>
+    
+  </section><!-- End Our Portfolio Section -->
+
+  <!-- Large Modal -->
+  <section class="annonc text-center row">
+    <button type="button" class="btn btn-annonce btn-block p-2" style="font-size: 18px;" data-toggle="button" aria-pressed="false" autocomplete="off" data-bs-toggle="modal" data-bs-target="#fullscreenModal">
+      Cliquez ici pour publier une annonce 
+      <i class="bx bx-pen"></i> 
+    </button>
+  </section>
+
+  <!-- Accordion without outline borders -->
+  <div class="accordion accordion-flush row border mt-1 mb-2" id="accordionFlushExample">
+    <div class="accordion-item">
+      <h2 class="accordion-header border-bottom p-0" id="flush-headingOne">
+        <button class="accordion-button collapsed text-center" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+          <a  data-bs-toggle="dropdown" href="#" style="width: 100%;">
+            <i class="bi bi-filter" style="font-size: 18px;" aria-hidden="true"></i> Filtrer par
+          </a>
+        </button>
+      </h2>
+      <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+        <ul id="portfolio-flters">
+          <li data-filter="*" class="filter-active">Tous</li>
+          <% categories.forEach( categorie => { %>
+            <li data-filter=".filter-<%= categorie.nomcat %>"><%= categorie.nomcat %></li>
+          <% }) %>
+        </ul>
+      </div>
+    </div>
+  </div><!--End Accordion without outline borders -->
+
+  <!-- ======= Portfolio Section ======= -->
+  <section class="portfolio pb-0">
+    <div class="container">
+      
+      <% if (locals.annonce.length > 0) { %>
+        
+        <!-- numbre de donnée -->
+        <!-- <input type="hidden" value="4" id="allData"> -->
+        <input type="hidden" value="<%= locals.annonce.length %>" id="allData">
+
+        <div class="portfolio-container d-none d-md-block col-12 border py-0" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500" style="height: 100%; display: grid; margin: 0; padding: 0; position: relative">
+
+          <% for( let i =0; i < locals.annonce.length; i++ ) {
+            const article = annonce[i] %>
+            <div class="portfolio-wrap filter-<%= article.nomcat %> card1 m-0 p-1 border" id="id<%=i%>" style="width: 33.3%;">
+              <div class="portfolio-item">
+
+                <!-- Card with an image on top -->
+                <div class="card p-0">
+                  <div id="carouselExampleControl<%=i%>" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                      <div class="carousel-item active">
+                        <img src="data:image/png;base64,<%= JSON.parse(article.image)[0].data %>" class="d-block w-100" alt="...">
+                      </div>
+                      <% for (let e=1; e < JSON.parse(article.image).length; e++) { %>
+                        <div class="carousel-item">
+                          <img src="data:image/png;base64,<%= JSON.parse(article.image)[e].data %>" class="d-block w-100" alt="...">
+                        </div>
+                      <% } %>
+                    </div>
+
+                    <% if (JSON.parse(article.image).length > 1) { %>
+                      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControl<%=i%>" data-bs-slide="prev">
+                        <span class="rounded-circle carousel-control-prev-icon" aria-hidden="true" style="background: #f7f7f7d3; color: #9b3131;">
+                          <i class="bx bx-chevron-left" aria-hidden="true" style="font-size: 34px;"></i>
+                        </span>
+                        <span class="visually-hidden">Previous</span>
+                      </button>
+                      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControl<%=i%>" data-bs-slide="next">
+                        <span class="rounded-circle carousel-control-next-icon" aria-hidden="true" style="background: #f7f7f7d3; ; color: #9b3131;">
+                          <i class="bx bx-chevron-right" aria-hidden="true" style="font-size: 34px;"></i>
+                        </span>
+                        <span class="visually-hidden">Next</span>
+                      </button>
+                    <% }%>
+
+                  </div><!-- End Slides with controls -->
+                </div><!-- End Card with an image on top -->
+
+                <div class="portfolio-info">
+                  <div>
+                    <h3><%= article.design %></h3>
+                    <p><%= article.description %></p>
+                    <a href="/kin-market/article-detail" title="Portfolio Details" class="btn btn-dark">
+                      Voir le detail
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% } %>
+
+          <!-- <div class="col-12 mb-2 d-md-none portfolio-wrap text-center"> 
+            <span>Cliquez ici pour <a href="/kin-market">Voir plus <i class="bx bx-chevron-right"></i></a></span>
+          </div> -->
+        </div>
+
+        <div class="portfolio-container portfolio-container2 d-md-none col-12 border py-0" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500" style="height: 100%; display: block; margin: 0; padding: 0; position: relative">
+
+          <% for( let i =0; i < locals.annonce.length; i++ ) { 
+            const article = annonce[i] %>
+            <!-- Card with an image on top -->
+            <div class="col-6 portfolio-wrap portfolio-wrap2 filter-<%= article.nomcat %> card2 m-0 p-1 border" style="width: 50%;">
+              <a href="/kin-market/article-detail" class="card p-0">
+                <div id="carouselExampleControls<%=i%>" class="carousel slide" data-bs-ride="carousel">
+                  <div class="carousel-inner">
+                    <div class="carousel-item active">
+                      <img src="data:image/png;base64,<%= JSON.parse(article.image)[0].data %>" class="d-block w-100" alt="...">
+                    </div>
+                    <% for (let e=1; e < JSON.parse(article.image).length; e++) { %>
+                      <div class="carousel-item">
+                        <img src="data:image/png;base64,<%= JSON.parse(article.image)[e].data %>" class="d-block w-100" alt="...">
+                      </div>
+                    <% } %>
+                  </div>
+
+                  <% if (JSON.parse(article.image).length > 1) { %>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls<%=i%>" data-bs-slide="prev">
+                      <span class="rounded-circle carousel-control-prev-icon" aria-hidden="true" style="background: #f7f7f7d3; color: #9b3131;">
+                        <i class="bx bx-chevron-left" aria-hidden="true" style="font-size: 34px;"></i>
+                      </span>
+                      <span class="visually-hidden">Previous</span>
+                    </button>
+
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls<%=i%>" data-bs-slide="next">
+                      <span class="rounded-circle carousel-control-next-icon" aria-hidden="true" style="background: #f7f7f7d3; ; color: #9b3131;">
+                        <i class="bx bx-chevron-right" aria-hidden="true" style="font-size: 34px;"></i>
+                      </span>
+                      <span class="visually-hidden">Next</span>
+                    </button>
+                  <% }%>
+
+                </div><!-- End Slides with controls -->
+                <div class="card-body">
+                  <h5 class="card-title"><%= article.design %></h5>
+                  <p class="card-text">Some quick example text</p>
+                </div>
+              </a><!-- End Card with an image on top -->
+            </div><!-- End Card with an image on top -->
+          <% } %>
+          
+        </div>
+
+      <% } %>
+
+      <!--Pagination red-->
+      <nav class="text-center block-paginate">
+        <nav aria-label="Page navigation">
+          <ul class="pagination">
+            <li class="page-item disabled">
+              <a class="page-link prev" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+              </a>
+            </li>
+            
+            <% for( let i =1; i <= Math.ceil(locals.annonce.length / 10); i++ ) {
+            const article = annonce[i] %>
+              
+            <% if (i == 1) {%>
+              <li class="page-item active"><a class="page-link page<%=i %> pages" href="#"><%= i %></a></li>
+            <% } else {%>
+              <li class="page-item"><a class="page-link page<%=i %> pages" href="#"><%= i %></a></li>
+            <% } %>
+
+            <% } %>
+            
+            <li class="page-item">
+              <a class="page-link next" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </nav>
+      <!--/Pagination red-->
+
+      <% if (locals.annonce.length == 0) { %>
+        <div class="alert alert-secondary text-center" role="alert">
+          <strong>Il n'y a aucune publication !</strong>
+        </div>
+      <% } %>
+
+    </div>
+  </section><!-- End Portfolio Section -->
+
+</main><!-- End #main -->
+  
+<%- include('modal') -%>
+
+<%- include('footer') -%>

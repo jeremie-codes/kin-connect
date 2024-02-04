@@ -1,0 +1,190 @@
+<div class="modal fade" id="fullscreenModal" tabindex="-1">
+  <div class="modal-dialog modal-fullscreen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Publier une annonce</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        <% if (locals.user) { %>
+    
+          <form class="p-5 pt-2 validate-form" enctype="multipart/form-data" action="/kin-market/add-data" method="post">
+  
+            <div class="d-flex align-items-center pb-2" href="#" data-bs-toggle="dropdown" style="color: #1a1010;">
+              <img src="data:image/png;base64,<%= user.image %>" alt="Profile" class="rounded-circle" style="width: 50px; height: 50px;">
+              <span class="d-md-block d ps-2"><%= user.prenom + ' ' +user.nom %></span>
+            </div><!-- End Profile Iamge Icon -->
+
+            <div class="row">
+              <div class="alert alert-danger alert-dismissible alert-annonces fade d-none show text-center p-2" role="alert">
+                <small>
+                  Vous avez atteint le nombre maximal de 5 photos!
+                </small>
+              </div>
+              <div class="form-control col p-3 d-flex" id="image-block">
+                <!-- block image upload -->
+              </div>
+
+              <div class="form-control col text-center p-0 add" id="addbtn" style="overflow: hidden;">
+                <i class="bi bi-plus-square-dotted" aria-hidden="true" style="font-size: 50px; font-weight: lighter; padding: 0; margin: 0;"></i>
+                <small style="position: absolute; margin-top: 57px; margin-left: -58px;">Cliquez ici</small>
+                <input type="file" onchange="getImage(this.files[0])" id="image1" name="image1" style="position: absolute; margin-top: 0px; margin-left: -50px; height: 60px; width: 50px; border: 1px solid #40fb40; cursor: pointer; opacity: 0;">
+                <input type="file" class="d-none" onchange="getImage(this.files[0])" id="image2" name="image1" style="position: absolute; margin-top: 0px; margin-left: -50px; height: 60px; width: 50px; border: 1px solid #fb9140; cursor: pointer; opacity: 0;">
+                <input type="file" class="d-none" onchange="getImage(this.files[0])" id="image3" name="image1" style="position: absolute; margin-top: 0px; margin-left: -50px; height: 60px; width: 50px; border: 1px solid #fbe540; cursor: pointer; opacity: 0;">
+                <input type="file" class="d-none" onchange="getImage(this.files[0])" id="image4" name="image1" style="position: absolute; margin-top: 0px; margin-left: -50px; height: 60px; width: 50px; border: 1px solid #f840fb; cursor: pointer; opacity: 0;">
+                <input type="file" class="d-none" onchange="getImage(this.files[0])" id="image5" name="image1" style="position: absolute; margin-top: 0px; margin-left: -50px; height: 60px; width: 50px; border: 1px solid #4065fb; cursor: pointer; opacity: 0;">
+                <input type="file" class="d-none" onchange="getImage(this.files[0])" id="image6" name="image1" style="position: absolute; margin-top: 0px; margin-left: -50px; height: 60px; width: 50px; border: 1px solid #fb4040; cursor: pointer; opacity: 0;">
+              </div>
+              <small class="text-munted"> Choisissez jusqu'à 5 photos, Commencez d'abord par la photo principale <br>* (obligatoir)</small>
+
+              <script>
+                function getImage (file) {
+                  var reader =  new FileReader()
+
+                  reader.addEventListener('load', function () {
+                    if (document.querySelector('#image-block').children.length < 5 ) {
+                      document.querySelector('#image-block').innerHTML += `<div id="img${document.querySelector('#image-block').children.length +1}" style="border: 1px solid #aaa8a8; margin-left: 5px; width: 60px; height: 60px; overflow: hidden;" >
+                        <button type="button" class="btn btn-outline-light" title="Supprimer la photo" style="position: absolute; margin-left: 10px" onclick="deletimg(${document.querySelector('#image-block').children.length +1})"> &times; </button>
+                        <img src="${reader.result}" alt="Profile" style="width: 60px;">
+                      </div>`
+
+                      // console.log(document.querySelector('#image-block'));
+                      console.log(document.querySelector('#addbtn'));
+
+                      for(let i=1; i<=6; i++) {
+                        document.querySelector(`#image`+i).classList.add('d-none')
+                      }
+                      if (document.querySelector('#image-block').children.length==1) {
+                        document.querySelector(`#image2`).classList.remove('d-none')
+                      }
+                      else if (document.querySelector('#image-block').children.length==2) {
+                        document.querySelector(`#image3`).classList.remove('d-none')
+                      }
+                      else if (document.querySelector('#image-block').children.length==3) {
+                        document.querySelector(`#image4`).classList.remove('d-none')
+                      }
+                      else if (document.querySelector('#image-block').children.length==4) {
+                        document.querySelector(`#image5`).classList.remove('d-none')
+                      }
+                      else if (document.querySelector('#image-block').children.length==5) {
+                        document.querySelector(`#image6`).classList.remove('d-none')
+                      }
+                      else if (document.querySelector('#image-block').children.length==6) {
+                        document.querySelector(`#image6`).classList.remove('d-none')
+                      }
+                    } else {
+                      $(".alert-annonces").removeClass('d-none')
+                      setTimeout(() => {
+                        $(".alert-annonces").addClass('d-none')
+                      }, 4000);
+                    }
+                  })
+                  reader.readAsDataURL(file)
+                }
+
+                function deletimg(id) {
+                  for(let i=1; i<=6; i++) {
+                    document.querySelector(`#image`+i).classList.add('d-none')
+                  }
+                  // document.querySelector(`#image${id}`).classList.remove('d-none')
+                  // document.querySelector(`#image${id}`).removeAttribute('value')
+                  let ind = document.createElement('input')
+                  ind.id = 'image'+id
+                  ind.name = 'image1'
+                  ind.type ="file"
+                  ind.setAttribute('onchange', "getImage(this.files[0])")
+                  ind.style = "position: absolute; margin-top: 0px; margin-left: -50px; height: 60px; width: 50px; border: 1px solid #4065fb; cursor: pointer; opacity: 0;"
+                  document.querySelector('#addbtn').replaceChild(ind, document.querySelector('#image'+id));
+                  document.querySelector('#image-block').removeChild(document.querySelector('#img'+id));
+
+                }
+
+              </script>
+            </div>
+
+            <div class="form-group row mt-4">
+              <div class="col-sm-1-12 validate-input" data-validate = "Champs Obligatoir">
+                <select class="form-control input100 p-2" name="categorie">
+                  <option>Catégorie*</option>
+                  <% categories.forEach( categorie => { %>
+                    <option value="<%= categorie.idcat %>"><%= categorie.nomcat %></option>
+                  <% }) %>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group row mt-4">
+              <div class="col-sm-1-12 validate-input" data-validate = "Champs Obligatoir">
+                <input type="text" class="form-control input100 p-2 text-munted" name="titre" placeholder="Titre*">
+              </div>
+            </div>
+
+            <div class="form-group row mt-4">
+              <div class="col-sm-1-12 validate-input" data-validate = "Champs Obligatoir">
+                <input type="text" class="form-control input100 p-2 text-munted" name="prix" placeholder="Prix*">
+              </div>
+            </div>
+
+            <div class="form-group row mt-4">
+              <div class="col-6 validate-input" data-validate = "Champs Obligatoir">
+                <select class="form-control input100 p-2" name="commune">
+                  <option>Commune*</option>
+                  <option value="kinshasa">Kinshasa</option>
+                  <option value="Gombe">Gombe</option>
+                  <option value="Matete">Matete</option>
+                  <option value="Ngaliema">Ngaliema</option>
+                </select>
+              </div>
+
+              <div class="col-6 validate-input" data-validate = "Champs Obligatoir">
+                <input type="text" class="form-control input100 p-2 text-munted" name="adresse" placeholder="Adresse complète*">
+              </div>
+            </div>
+
+            <div class="form-group row mt-4">
+              <div class="col-sm-1-12 validate-input" data-validate = "Champs Obligatoir">
+                <input type="text" class="form-control input100 p-2 text-munted" name="phone" placeholder="Phone*">
+              </div>
+            </div>
+
+            <div class="form-group row mt-4">
+              <div class="col-sm-1-12">
+                <textarea class="form-control input100" name="description" rows="3" placeholder="Description"></textarea>
+              </div>
+            </div>
+
+            <div class="row mt-4 d-flex">
+              <div class="col-12">
+                <a href="/" class="btn btn-secondary col-3" >Annuler</a>
+                <button type="submit" class="btn btn-primary col-3">Publier</button>
+              </div>
+            </div>
+
+          </form>
+          
+        <% } %>
+
+        <% if (!locals.user) { %>
+          <div class="row p-5">
+            <div class="form-control input100 text-center">
+              <i class="bi bi-emoji-smile" aria-hidden="true" style="font-size: 50px; font-weight: lighter;"></i><br>
+              <small>Désolé vous devriez d'abord vous connecter à votre compte avant de publier une annonce ! </small><br>
+              <span>
+                <a href="/login" style="color: #9b3131;">Se Connecter</a> | 
+                <a href="/inscription" style="color: #9b3131;">S'inscrire</a>
+              </span>
+            </div>
+          </div>
+
+          <div class="row pb-4 fixed-bottom">
+            <div class="col-12">
+              <a href="/" class="btn btn-secondary col-3 offset-1" >Annuler</a>
+            </div>
+          </div>
+        <% } %>
+      </div>
+
+    </div>
+  </div>
+</div><!-- End Full Screen Modal-->

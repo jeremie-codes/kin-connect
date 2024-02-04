@@ -1,0 +1,235 @@
+  <!-- ======= Footer ======= -->
+  <footer id="footer" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
+
+    <div class="footer-newsletter">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6">
+            <h4>Notre Newsletter</h4>
+            <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
+          </div>
+          <div class="col-lg-6">
+            <form action="" method="post">
+              <input type="email" name="email">
+              <a href="/inscription">
+                <input type="button" value="S'inscrire">
+              </a>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-4 col-md-6 footer-links">
+            <h4>Autre Liens</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Accueil</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Kin Market</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Team</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Apropos</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Contact</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-4 col-md-6 footer-contact">
+            <h4>Contactez-nous</h4>
+            <p>
+              A108 Adam Street <br>
+              New York, NY 535022<br>
+              United States <br><br>
+              <strong>Phone:</strong> +243 82 55488 55<br>
+              <strong>Email:</strong> kinconnectbusiness@gmail.com<br>
+            </p>
+
+          </div>
+
+          <div class="col-lg-4 col-md-6 footer-info">
+            <h3>A propos de nous</h3>
+            <p>Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies darta donna mare fermentum iaculis eu non diam phasellus.</p>
+            <div class="social-links mt-3">
+              <a href="#" class="twitter"><i class="bx bxl-tiktok"></i></a>
+              <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+              <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+              <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><span>Kin Connect</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/free-bootstrap-template-corporate-moderna/ -->
+        Designed by <a href="/">Insoft-innovation</a>
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="/assets/js/jquery/jquery-3.2.1.min.js"></script>
+  <script src="/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="/assets/vendor/aos/aos.js"></script>
+  <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="/assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="/assets/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="/assets/vendor/php-email-form/validate.js"></script>
+  <script src="/assets/vendor/typed.js/typed.umd.js"></script>
+
+
+  <!-- Template Main JS File -->
+  <script src="/assets/js/tilt.jquery.min.js"></script>
+  <script src="/assets/authCss/js/mains.js"></script>
+  <script src="/assets/js/main.js"></script>
+  <!-- <script src="/assets/js/bootstrap-paginator.js"></script> -->
+  <!-- <script src="/assets/js/qunit-1.11.0.js"></script> -->
+  <script >
+
+    $('.js-tilt').tilt({
+      scale: 1.1
+		})
+    
+    function showMenu() {
+      $('.nav-menu').toggleClass('active')
+    }
+    
+    setTimeout(() => {
+      $(".alert-annonce").addClass('d-none')
+    }, 5000);
+
+    var pagination = document.querySelectorAll('.pages');
+    var card = document.querySelectorAll('.card1');
+    var card2 = document.querySelectorAll('.card2');
+    var portfolio = document.querySelector('.portfolio-container');
+    var prev = document.querySelector('.prev');
+    var next = document.querySelector('.next');
+
+    function getData (i) {
+      card.forEach( (page, key) => {
+        page.parentElement.classList.remove('active');
+        let ceil = (i+1) * 10 + (i+1) * 2
+        // console.log();
+        if (key < ceil && key >= ceil - 12) {
+          portfolio.style.height = '100%';
+          // portfolio.style.width = '100%';
+          card[key].style = 'position: relative; display: inline-block; margin: 0; padding: 0; position: relati; top: 0; left: 0; width: 33%'
+          card2[key].style = 'position: relative; display: inline-block; margin: 0; padding: 0; position: relati; top: 0; left: 0; width: 49.5%'
+        }
+        else{
+          card[key].style = 'display: none'
+          card2[key].style = 'display: none'
+          portfolio.style.height = '100%';
+          portfolio.style.position = 'relative';
+        }
+      })
+    }
+    
+    for (let i = 0; i < card.length; i++) {
+
+      if (i < 12) {
+        portfolio.style.height = '100%';
+        // portfolio.style.width = '100%';
+        card[i].style = 'position: relative; display: inline-block; margin: 0; padding: 0; position: relati; top: 0; left: 0; width: 33%'
+        card2[i].style = 'position: relative; display: inline-block; margin: 0; padding: 0; position: relati; top: 0; left: 0; width: 49.5%'
+      }
+      else{
+        card[i].style = 'display: none'
+        card2[i].style = 'display: none'
+        portfolio.style.height = '100%';
+        portfolio.style.position = 'relative';
+      }
+      
+    }
+
+    for (let i = 0; i < pagination.length; i++) {
+
+      pagination[i].addEventListener('click', () => {
+        pagination.forEach( (page) => {
+          page.parentElement.classList.remove('active');
+        })
+        
+        pagination[i].parentElement.classList.add('active');
+        getData(i)
+
+        disableBtn(i, pagination.length)
+          
+      })
+
+    }
+
+    function disableBtn(id, len) {
+      len = len - 1;
+      console.log(id, len);
+      if (id == len) {
+        next.parentElement.classList.add('disabled');
+        console.log('trouvé');
+      }
+      else {
+        next.parentElement.classList.remove('disabled');
+        console.log('Non trouvé');
+      }
+      
+      if (id == 0) {
+        prev.parentElement.classList.add('disabled');
+        console.log('gauche trouvé');
+      }
+      else {
+        prev.parentElement.classList.remove('disabled');
+        console.log('gauche Non trouvé');
+      }
+      
+    }
+
+    next.addEventListener('click', () => {
+      
+      for (let e = 0; e < pagination.length; e++) {
+
+        if (pagination[e].parentElement.classList.contains('active')) {
+          
+          // console.log('c\'est ' + e);
+          pagination[e].parentElement.classList.remove('active');
+          e++
+          disableBtn(e, pagination.length)
+          pagination[e].parentElement.classList.add('active');
+          getData (e)
+        }
+      }
+
+    })
+
+    prev.addEventListener('click', () => {
+     
+      for (let e = 0; e < pagination.length; e++) {
+
+        if (pagination[e].parentElement.classList.contains('active')) {
+          
+          // console.log('c\'est ' + e);
+          pagination[e].parentElement.classList.remove('active');
+          e--
+          disableBtn(e, pagination.length)
+          pagination[e].parentElement.classList.add('active');
+          getData (e)
+        }
+      }
+      
+    })
+
+  </script>
+
+</body>
+
+</html>

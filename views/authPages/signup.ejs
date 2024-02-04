@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>kinconnect-inscription</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<!-- MATERIAL DESIGN ICONIC FONT -->
+			<link rel="stylesheet" href="assets/authCss/fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
+			<link rel="stylesheet" href="assets/authCss/fonts/font-awesome-4.7.0/css/font-awesome.css">
+			<link rel="stylesheet" type="text/css" href="assets/authCss/vendor/bootstrap/css/bootstrap.min.css">
+			<!--===============================================================================================-->
+				<link rel="stylesheet" type="text/css" href="assets/authCss/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+			<!--===============================================================================================-->
+				<link rel="stylesheet" type="text/css" href="assets/authCss/vendor/animate/animate.css">
+			<!--===============================================================================================-->	
+				<link rel="stylesheet" type="text/css" href="assets/authCss/vendor/css-hamburgers/hamburgers.min.css">
+			<!--===============================================================================================-->
+				<link rel="stylesheet" type="text/css" href="assets/authCss/vendor/select2/select2.min.css">
+			<!--===============================================================================================-->
+				<link rel="stylesheet" type="text/css" href="assets/authCss/css/util.css">
+		<!--===============================================================================================-->
+	
+		<!-- STYLE CSS -->
+		<link rel="stylesheet" href="assets/authCss/css/style.css">
+		<style>
+			.login:hover i, .login:hover span {
+				color: rgb(242, 118, 118);
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div class="wrapper" style="background-image: url('images/bg-registration-form-2.jpg');">
+			<div class="inner" style="display: flex;">
+				<form class="login100-form validate-form" method="post">
+					<h3>FORMULAIRE D'INSCRIPTION</h3>
+					<div class="form-group">
+						<div class="form-wrapper validate-input" data-validate = "Champs Obligatoir">
+							<label for="">Prénom *</label>
+							<input name="firstname" type="text" class="form-control input100"> 
+						</div>
+						<div class="form-wrapper validate-input" data-validate = "Champs Obligatoir">
+							<label for="">Nom *</label>
+							<input name="lastname" type="text" class="form-control input100">
+						</div>
+					</div>
+					<div class="form-wrapper validate-input" data-validate = "L'email valide est de format: ex@abc.xyz">
+						<label for="">Email (facultative)</label>
+						<input name="email" type="email" class="form-control input100">
+					</div>
+					<div class="form-wrapper validate-input" data-validate = "Champ Obligatoir">
+						<label for="">Numéro de Téléphone *</label>
+						<input name="phone" type="number" class="form-control input100" style="padding-left: 70px;">
+						<span style="position: absolute; margin-top: -27px; margin-left: 25px; font-weight: bold;">+243</span>
+					</div>
+					<div class="form-wrapper validate-input" data-validate = "Champ Obligatoir">
+						<label for="">Mot de Passe *</label>
+						<input name="password" type="password" class="form-control input100">
+					</div>
+					<div class="form-wrapper validate-input" data-validate = "Champ Obligatoir">
+						<label for="">Confirme Mot de Passe *</label>
+						<input name="confpass" type="password" class="form-control input100">
+					</div>
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" required> 
+							<span class="checkmark"></span>
+							<span style="position: relative; top: 3px;">J'accepte les conditions d'utilisation et la politique de confidentialité.</span>
+						</label>
+					</div>
+					
+					<button class="button">S'inscrire Maintenant</button>
+
+					<% if (locals.errors) { %>
+
+						<div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close" style="cursor: pointer;">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<strong>
+								<%= errors %>
+							</strong>
+						</div>
+						<script>
+							$(".alert").alert();
+						</script>
+							
+					<% } %>
+
+					<a href="/login" class="login" style="position: relative; margin-left: 5px; text-decoration: none; top: 0px; color: grey; " >
+						<i class="fa fa-long-arrow-left" aria-hidden="true" style="font-size: 20px; margin-right: 5px; position: relative; top: 3px;"></i> <span> Se connecter</span>
+					</a>
+				</form>
+
+				<div class="login100-pic js-tilt" data-tilt style="position: relative; left: 30px; top: 100px;">
+					<img src="assets/authCss/images/logo.png" alt="IMG">
+				</div>
+			</div>
+		</div>
+
+		<!--===============================================================================================-->	
+			<script src="assets/authCss/vendor/jquery/jquery-3.2.1.min.js"></script>
+		<!--===============================================================================================-->
+			<script src="assets/authCss/vendor/bootstrap/js/popper.js"></script>
+			<script src="assets/authCss/vendor/bootstrap/js/bootstrap.min.js"></script>
+		<!--===============================================================================================-->
+			<script src="assets/authCss/vendor/select2/select2.min.js"></script>
+		<!--===============================================================================================-->
+			<script src="assets/authCss/vendor/tilt/tilt.jquery.min.js"></script>
+
+			<script >
+				$('.js-tilt').tilt({
+					scale: 1.1
+				})
+			</script>
+
+		<!--===============================================================================================-->
+			<script src="assets/authCss/js/mains.js"></script>
+	</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>

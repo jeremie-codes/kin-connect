@@ -1,0 +1,231 @@
+<%- include('header') -%>
+
+<main id="main" class="main">
+
+  <!-- ======= Our Portfolio Section ======= -->
+  <section class="breadcrumbs">
+    <div class="container">
+
+      <div class="d-flex justify-content-between align-items-center">
+        <h2 class="mt-2"><i class="bx bx-user"></i> <span>Espace de travail</span></h2>
+        <ol>
+          <li><a href="/">accueil</a></li>
+          <li>workspace</li>
+        </ol>
+      </div>
+      
+    </div>
+  </section><!-- End Our Portfolio Section -->
+
+  <section class="section profile p-md-5">
+    <div class="row p-4">
+      <div class="col-xl-4">
+
+        <div class="card">
+          <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
+
+            <div class="rounded-circle" style="width: 120px; height: 120px; overflow: hidden;">
+              <img src="data:image/png;base64,<%= user.image %>" width="120" alt="Profile">
+            </div>
+            <h2><%= user.prenom + ' ' + user.nom %></h2>
+            <div class="social-links mt-2">
+              <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
+              <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+              <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+              <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-xl-8">
+
+        <div class="card">
+          <div class="card-body pt-3">
+            <!-- Bordered Tabs -->
+            
+            <ul class="nav nav-tabs nav-tabs-bordered d-flex" id="borderedTabJustified" role="tablist">
+
+              <li class="nav-item" role="presentation">
+                <button class="nav-link active" data-bs-toggle="tab" type="button" role="tab" aria-controls="home" aria-selected="true" data-bs-target="#profile-overview">Aperçu</button>
+              </li>
+
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" data-bs-toggle="tab" type="button" role="tab" aria-controls="home" aria-selected="true" data-bs-target="#profile-edit">Editer Profile</button>
+              </li>
+
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" data-bs-toggle="tab" type="button" role="tab" aria-controls="home" aria-selected="true" data-bs-target="#profile-settings">Vos annonces</button>
+              </li>
+
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" data-bs-toggle="tab" type="button" role="tab" aria-controls="home" aria-selected="true" data-bs-target="#profile-change-password">Changer Mot de passe</button>
+              </li>
+
+            </ul>
+
+            <div class="tab-content pt-2">
+
+              <div class="tab-pane fade show active profile-overview" id="profile-overview">
+
+                <h5 class="card-title pt-3">Profile Details</h5>
+
+                <div class="row">
+                  <div class="col-lg-3 col-md-4 label ">Nom Complet</div>
+                  <div class="col-lg-9 col-md-8"> <%= user.prenom + ' ' + user.nom %> </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-lg-3 col-md-4 label">Email</div>
+                  <div class="col-lg-9 col-md-8"> <%= user.email %> </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-lg-3 col-md-4 label">Téléphone</div>
+                  <div class="col-lg-9 col-md-8">(+243) <%= user.phone %> </div>
+                </div>
+
+                <div class="row pb-2" >
+                  <div class="col-lg-3 col-md-4 label">Type de Compte</div>
+                  <div class="col-lg-9 col-md-8"> <%= user.role %> </div>
+                </div>
+
+              </div>
+
+              <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
+
+                <!-- Profile Edit Form -->
+                <form action="/user/workspace/update-profile" enctype="multipart/form-data" method="post">
+                  
+                  <div class="row mb-3">
+                    <label for="profileImage" class="col-md-3 col-lg-2 col-form-label">Profile Image</label>
+                    <div class="col-md-8 col-lg-9">
+                      <div style="border: 1px solid #aaa8a8; width: 100px; height: 100px; overflow: hidden;" >
+                        <img src="data:image/png;base64,<%= user.image %>" id="imagechange" width="100">
+                      </div>
+                      <div class="pt-2">
+                        <a href="#" class="btn btn-primary btn-sm overflow-hidden" title="Changer la photo de profile" style="height: 35px; width: 100px;">
+                          <i class="bi bi-upload"> 
+                            <input type="file" name="photofile" onchange="getimage(this.files[0])" style="position: relative; left: -27px; top: -25px; padding: 30px; opacity: 1; cursor: pointer;"> 
+                          </i>
+                        </a>
+                        <script>
+                          function getimage (file) {
+                            var reader =  new FileReader()
+
+                            reader.addEventListener('load', function () {
+                              document.querySelector('#imagechange').src = reader.result
+                            })
+                            reader.readAsDataURL(file)
+                          }
+
+                        </script>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- id current user -->
+                  <input name="iduser" type="text" class="form-control input100" value="<%= user.id %>" hidden> 
+
+                  <div class="form-group">
+                    <div class="form-wrapper validate-input" data-validate = "Champs Obligatoir">
+                      <label for="">Prénom *</label>
+                      <input name="firstname" type="text" class="form-control input100" value="<%= user.prenom %>"> 
+                    </div>
+                    <div class="form-wrapper validate-input" data-validate = "Champs Obligatoir">
+                      <label for="">Nom *</label>
+                      <input name="lastname" type="text" class="form-control input100" value="<%= user.nom %>">
+                    </div>
+                  </div>
+
+                  <div class="form-wrapper validate-input" data-validate = "L'email valide est de format: ex@abc.xyz">
+                    <label for="">Email (facultative)</label>
+                    <input name="email" type="email" class="form-control input100" value="<%= user.email %>">
+                  </div>
+
+                  <div class="form-wrapper validate-input" data-validate = "Champ Obligatoir">
+                    <label for="">Numéro de Téléphone *</label>
+                    <input name="phone" type="number" class="form-control input100" value="<%= user.phone %>" style="padding-left: 70px;">
+                    <span style="position: absolute; margin-top: -27px; margin-left: 25px; font-size: 14px;">+243</span>
+                  </div>
+
+                  <div class="text-center mt-3">
+                    <button type="submit" class="btn btn-primary">Enregistrer le changement</button>
+                  </div>
+                </form><!-- End Profile Edit Form -->
+
+              </div>
+
+              <div class="tab-pane fade pt-3" id="profile-settings">
+
+                <!-- Settings Form -->
+                <form>
+                  <div class="text-center">
+                    <button type="button" class="form-control btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off" data-bs-toggle="modal" data-bs-target="#fullscreenModal">
+                      Publier une nouvelle annonce 
+                      <i class="bx bx-plus"></i> </button>
+                  </div>
+
+                  <div class="card-body pb-0">
+                    <h5 class="card-title">Toutes les anonnces</h5>
+      
+                    <div class="news">
+                      
+                      <% for (let i =0; i < 4; i++) { %>
+                        <div class="post-item clearfix border pt-1">
+                          <img src="data:image/png;base64,<%= user.image %>" id="imagechange" width="100">
+                          <h4><a href="#">Nihil blanditiis at in nihil autem</a></h4>
+                          <p>Sit recusandae non aspernatur laboriosam. Quia enim eligendi sed ut harum...</p>
+                          <button type="button" class="btn btn-outline-danger" title="Supprimer l'annonce" style="top: -10px; left: 15px; position: relative;"> <i class="bi bi-trash" aria-hidden="true"></i> </button>
+                          <button type="button" class="btn btn-outline-secondary" title="Modifer" style="top: -10px; left: 15px; position: relative;"> <i class="bi bi-pencil" aria-hidden="true"></i> </button>
+                        </div>
+                      <% } %>
+                      
+                    </div>
+      
+                  </div>
+                </form><!-- End settings Form -->
+
+              </div>
+
+              <div class="tab-pane fade pt-3" id="profile-change-password">
+                <!-- Change Password Form -->
+                <form>
+
+                  <div class="form-wrapper validate-input" data-validate = "Champ Obligatoir">
+                    <label for="">Mot de passe courrant *</label>
+                    <input name="password" type="password" class="form-control input100">
+                  </div>
+
+                  <div class="form-wrapper validate-input" data-validate = "Champ Obligatoir">
+                    <label for="">Nouveau mot de passe *</label>
+                    <input name="password" type="password" class="form-control input100">
+                  </div>
+
+                  <div class="form-wrapper validate-input" data-validate = "Champ Obligatoir">
+                    <label for="">Confirmez Mot de Passe *</label>
+                    <input name="confpass" type="password" class="form-control input100">
+                  </div>
+
+                  <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Change Password</button>
+                  </div>
+                </form><!-- End Change Password Form -->
+
+              </div>
+
+            </div><!-- End Bordered Tabs -->
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main><!-- End #main -->
+
+<%- include('modal') -%>
+
+<%- include('footer') -%>
