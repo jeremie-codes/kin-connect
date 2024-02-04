@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "name": "andadec-data-users",
+  "name": "kin-connect",
   "builds": [
     { "src": "server.js", "use": "@versel/node" }
   ],
