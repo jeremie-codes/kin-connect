@@ -2,7 +2,7 @@
   "version": 2,
   "name": "andadec-data-users",
   "builds": [
-    { "src": "server.js", "use": "@versel/node" }
+    { "src": "server.js", "use": "@vercel/node" }
   ],
   "routes": [
     { "src": "/{.*}", "dest": "/server.js" }
